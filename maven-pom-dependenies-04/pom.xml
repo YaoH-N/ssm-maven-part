@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- gavp属性 -->
+    <!-- 一旦声明不会改变 -->
+    <groupId>com.atguigu</groupId>
+    <artifactId>maven-pom-dependenies-04</artifactId>
+    <!-- 构建过程 - 部署 - 修改 , a.b.c , 模块改变-修改a, 功能改变-修改b， bug修复-修改c -->
+    <version>1.0.1</version>
+    <!-- maven 工程的打包方式 java jar [默认值] web war pom(不打包) -->
+    <packaging>jar</packaging>
+
+
+    <!-- 声明版本号 -->
+    <properties>
+        <!-- 当多个依赖用的版本一样时，可以像声明变量一样统一管理，方便更改
+            在其他位置可以 引用 ${jackson.version}
+            注意：生命的标签建议两层以上命名！  如  依赖名.version   不建议直接用  version，以免冲突
+        -->
+        <jackson.version>2.15.2</jackson.version>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
+    </properties>
+
+    <!-- 第三方依赖信息声明
+            dependencies - 项目依赖信息的集合
+                dependency - 每个依赖项
+                    [gav]   - 依赖的信息，就是其他maven的工程 [jar]
+
+         第三方依赖信息如何知道？
+            1. maven提供的查询官网     https://mvnrepository.com/
+            2. maven插件 maven-search
+                安装插件
+                    tools
+                        maven-search 输入信息即可
+
+          扩展:
+            1. 提取版本号，统一管理
+            2. 可选属性scope
+                scope 引入以来的作用域
+                默认值：compile     main、test、打包和运行时都可以用的依赖
+                       test        只有test能用     如junit依赖  @Test
+                       runtime     main不会使用    test不会使用    打包和运行要使用    如反射机制 mysql   Class.forName(com.mysql.cj.jdbc.Driver)
+                       provided    main会使用      test会使用     打包和运行不使用    如servlet    HttpServlet  tomcat提供了servlet
+
+                总结：这是一种锦上添花的手段，如果掌握不好，就使用默认值，全部生效，  就肯定不会错
+    -->
+    <dependencies>
+        <dependency>
+            <!-- 定位信息 gav 三个属性是必须的 !!! -->
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>
