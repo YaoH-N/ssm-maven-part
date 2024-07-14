@@ -8,8 +8,7 @@
     <artifactId>maven-javaee-project-02</artifactId>
     <version>1.0-SNAPSHOT</version>
     <!-- 新增一列打包方式packaging -->
-    <packaging>war</packaging>
-
+    <packaging>pom</packaging>
 
     <!--
         手动创建web项目
